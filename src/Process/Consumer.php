@@ -71,6 +71,16 @@ class Consumer
                         echo "Consumer {$class} queue not exists\r\n";
                         continue;
                     }
+                    
+                    
+                    $enable   = $consumer->enable??true;
+                    if (!$enable) {
+                        echo "Consumer {$class} is disabled\r\n";
+                        continue;
+                    }
+                    
+
+                    
                     $this->_consumers[$queue] = $consumer;
                     $connection = Client::connection($connection_name);
                     $consumer_func = function ($message) use ($consumer) {
